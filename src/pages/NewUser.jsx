@@ -52,7 +52,13 @@ export default function NewUser() {
   
   const [rePasswordError, setrePasswordError] = useState("");
   const [usernameError, setusernameError] = useState("");
+  const [nameError, setnameError] = useState("");
+  const [surnameError, setsurnameError] = useState("");
   async function addNewUser() {
+    setrePasswordError("");
+    setusernameError("");
+    setnameError("");
+    setsurnameError("");
     let fItems = { username, password, rePassword, name, surname, adress, phone, email, website }
     let result = await fetch("http://localhost:8080/api/users/adduser",{
        method: 'POST', 
@@ -75,6 +81,10 @@ export default function NewUser() {
             setrePasswordError(data.errors[i].value);
             if(data.errors[i].name==="username") 
             setusernameError(data.errors[i].value);
+            if(data.errors[i].name==="name") 
+            setnameError(data.errors[i].value);
+            if(data.errors[i].name==="surname") 
+            setnameError(data.errors[i].value);
         }
        }
   }
@@ -129,11 +139,14 @@ export default function NewUser() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
+            <div style={{color:"red"}}>{nameError}</div>
+ 
             <TextField variant="outlined" margin="normal" required fullWidth
               id="surname" label="Soyadınız" name="surname"
               value={surname}
               onChange={(e) => setSurname(e.target.value)}
             />
+            <div style={{color:"red"}}>{surnameError}</div>
             <TextField variant="outlined" margin="normal" required fullWidth
               id="adress" label="Adres bilginiz" name="adress"
               value={adress}
