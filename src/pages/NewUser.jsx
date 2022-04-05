@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import LoginCaption from '../utils/login/loginCaption';
 import { Button, Link, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import { Label } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +49,9 @@ export default function NewUser() {
     }
 
   }
+  
+  const [rePasswordError, setrePasswordError] = useState("");
+  const [usernameError, setusernameError] = useState("");
   async function addNewUser() {
     let fItems = { username, password, rePassword, name, surname, adress, phone, email, website }
     let result = await fetch("http://localhost:8080/api/users/adduser",{
@@ -60,8 +64,19 @@ export default function NewUser() {
       },
       body: JSON.stringify(fItems)
     });
+    let i;
        const data = await (await result).json();
        console.log(data);
+       if(data.success===true){
+        history.push("/newLoginForm")
+       }else{
+        for(i=0;i<data.errors.length;i++){
+          if(data.errors[i].name==="rePassword") 
+            setrePasswordError(data.errors[i].value);
+            if(data.errors[i].name==="username") 
+            setusernameError(data.errors[i].value);
+        }
+       }
   }
   return (
     <div className={classes.root}>
@@ -86,6 +101,8 @@ export default function NewUser() {
               onChange={(e) => setUsername(e.target.value)}
               autoFocus
             />
+           <div style={{color:"red"}}>{usernameError}</div>
+ 
             <TextField variant="outlined" margin="normal" required fullWidth
               id="password"
               label="Şifrenizi girin."
@@ -94,6 +111,7 @@ export default function NewUser() {
               value={password}
               onChange={(e) => setPasword(e.target.value)}
             />
+
             <TextField variant="outlined" margin="normal" required fullWidth
               id="rePassword"
               label="Şifrenizi Tekrar girin."
@@ -102,6 +120,10 @@ export default function NewUser() {
               value={rePassword}
               onChange={(e) => setRePasword(e.target.value)}
             />
+            
+              
+                <div style={{color:"red"}}>{rePasswordError}</div>
+            
             <TextField variant="outlined" margin="normal" required fullWidth
               id="name" label="Adınız" name="name"
               value={name}
