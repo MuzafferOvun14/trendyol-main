@@ -27,6 +27,10 @@ export default function NewCompany() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
+
+  const [usernameError, setUsernameError] = useState("");
+  const [companyNameError, setCompanyNameError] = useState("");
+
   async function addNewCompany() {
     let fItems = { username, password, rePassword, companyName, adress, phone, email, website }
     let result = await fetch("http://localhost:8080/api/users/addCompany", {
@@ -40,7 +44,15 @@ export default function NewCompany() {
     });
     let i;
     const data = await (await result).json();
-
+    console.log(data);
+    if(data.success===true){
+      history.push("/newLoginForm")
+     }else{
+      for(i=0;i<data.errors.length;i++){
+        if(data.errors[i].name==="username") setUsernameError(data.errors[i].value);
+        if(data.errors[i].name==="companyName") setCompanyNameError(data.errors[i].value);
+      }
+     }
   }
   return (
     <div className={classes.root}>
@@ -66,6 +78,8 @@ export default function NewCompany() {
 
               autoFocus
             />
+            <div style={{color:"red"}}>{usernameError}</div>
+
             <TextField variant="outlined" margin="normal" required fullWidth
               id="password"
               label="Şifrenizi girin."
@@ -91,6 +105,8 @@ export default function NewCompany() {
               onChange={(e) => setCompanyName(e.target.value)}
 
             />
+            <div style={{color:"red"}}>{companyNameError}</div>
+
             <TextField variant="outlined" margin="normal" required fullWidth
               id="adress" label="Şirket Adres bilgisi" name="adress"
               value={adress}
