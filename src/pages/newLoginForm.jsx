@@ -29,7 +29,7 @@ export default function CenteredGrid() {
   const [password, setPasword] = useState("");
   async function loginUser() {
     let fItems = { username, password }
-    let result = await fetch("http://localhost:8080/api/users/login",{
+    let result = await fetch("http://localhost:8080/api/users/loginUser",{
        method: 'POST', 
       headers: { 
           "Content-Type": "application/json", 
@@ -41,12 +41,7 @@ export default function CenteredGrid() {
     let i;
        const data = await (await result).json();
        console.log(data);
-       if(data.success===true){
-        history.push("/newLoginForm")
-       }else{
-        for(i=0;i<data.errors.length;i++){
-        }
-       }
+   
   }
   return (
     <div className={classes.root}>
@@ -75,6 +70,7 @@ export default function CenteredGrid() {
             fullWidth
             variant="contained"
             color="primary"
+            onClick={loginUser}
              >
             Giriş
           </Button>
