@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -24,6 +24,29 @@ export default function CenteredGrid() {
   }
   function openNewUser(){
     history.push("/newUser")
+  }
+  const [username, setUsername] = useState("");
+  const [password, setPasword] = useState("");
+  async function loginUser() {
+    let fItems = { username, password }
+    let result = await fetch("http://localhost:8080/api/users/login",{
+       method: 'POST', 
+      headers: { 
+          "Content-Type": "application/json", 
+        "accept": "*/*"
+        
+      },
+      body: JSON.stringify(fItems)
+    });
+    let i;
+       const data = await (await result).json();
+       console.log(data);
+       if(data.success===true){
+        history.push("/newLoginForm")
+       }else{
+        for(i=0;i<data.errors.length;i++){
+        }
+       }
   }
   return (
     <div className={classes.root}>
