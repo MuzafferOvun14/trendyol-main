@@ -43,8 +43,12 @@ export default function CenteredGrid() {
     });
     let i;
        const data = await (await result).json();
+       setPasswordError("");
+       setUsernameError("");
        if(data.success===true){
           console.log("Giriş Başarılı");
+          console.log(data);
+          sessionStorage.setItem("session_code",data.data[0].sessionCode);
        }else{
         console.log("Giriş hatalı");
         for(i=0;i<data.errors.length;i++){
