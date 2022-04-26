@@ -1,6 +1,10 @@
 import React from 'react'
+import { Route } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import CompanyMenu from './menu';
+import Category from './Category';
+import Product from './Product';
+
 export default function company() {
     let sessionCode=sessionStorage.getItem("session_code");
      if(sessionCode!=""){
@@ -11,7 +15,9 @@ export default function company() {
                 <CompanyMenu/>
                 </Grid>
                 <Grid item xs={9}>
-                {sessionCode}
+                <Route  path="/company/category/" component={Category}/>
+                <Route  path="/company/products/" component={Product}/>
+
                 </Grid>
             </Grid>
             </div>

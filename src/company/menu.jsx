@@ -45,7 +45,7 @@ export default function CompanyMenu() {
                     <ListItemIcon>
                         <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Ürünler" onclick={urunOpen} />
+                    <ListItemText primary="Ürünler" onClick={urunOpen} />
                 </ListItem>
             </List>
             <Divider />
