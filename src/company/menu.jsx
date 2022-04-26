@@ -26,9 +26,12 @@ export default function CompanyMenu() {
     const classes = useStyles();
     const history = useHistory();
     function kategoriOpen() {
-
         history.push("/company/category")
     }
+    function urunOpen() {
+        history.push("/company/products")
+    }
+
     return (
         <div className={classes.root}>
             <List component="nav" aria-label="main mailbox folders">
@@ -42,7 +45,7 @@ export default function CompanyMenu() {
                     <ListItemIcon>
                         <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Drafts" />
+                    <ListItemText primary="Ürünler" onclick={urunOpen} />
                 </ListItem>
             </List>
             <Divider />
