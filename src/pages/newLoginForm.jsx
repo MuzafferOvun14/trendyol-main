@@ -47,7 +47,11 @@ export default function CenteredGrid() {
           console.log("Giriş Başarılı");
        }else{
         console.log("Giriş hatalı");
-
+        for(i=0;i<data.errors.length;i++){
+          if(data.errors[i].name==="username") setUsernameError(data.errors[i].value);
+          if(data.errors[i].name==="password") setPasswordError(data.errors[i].value);
+        }
+  
        }
    
   }
