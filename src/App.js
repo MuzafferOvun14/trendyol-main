@@ -1,5 +1,6 @@
 import { Route } from 'react-router-dom';
 import './App.css';
+import company from './company/company';
 import NewCompany from './pages/NewCompany';
 
 import CenteredGrid from './pages/newLoginForm';
@@ -13,6 +14,7 @@ function App() {
       <Route  path="/login/" component={CenteredGrid}/>
       <Route  path="/newCompany/" component={NewCompany}/>
       <Route  path="/newUser/" component={NewUser}/>
+      <Route  path="/company/" component={company}/>
      </div>
   );
 }

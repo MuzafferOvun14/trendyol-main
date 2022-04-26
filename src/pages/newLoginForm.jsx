@@ -49,6 +49,7 @@ export default function CenteredGrid() {
           console.log("Giriş Başarılı");
           console.log(data);
           sessionStorage.setItem("session_code",data.data[0].sessionCode);
+          history.push("/company")
        }else{
         console.log("Giriş hatalı");
         for(i=0;i<data.errors.length;i++){
