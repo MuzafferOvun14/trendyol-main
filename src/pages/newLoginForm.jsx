@@ -27,6 +27,9 @@ export default function CenteredGrid() {
   }
   const [username, setUsername] = useState("");
   const [password, setPasword] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   async function loginUser() {
     let fItems = { username, password }
     let result = await fetch("http://localhost:8080/api/users/loginUser",{
@@ -40,7 +43,12 @@ export default function CenteredGrid() {
     });
     let i;
        const data = await (await result).json();
-       console.log(data);
+       if(data.success===true){
+          console.log("Giriş Başarılı");
+       }else{
+        console.log("Giriş hatalı");
+
+       }
    
   }
   return (
@@ -61,6 +69,8 @@ export default function CenteredGrid() {
             onChange={(e) => setUsername(e.target.value)}
             autoFocus
           />
+           <div style={{color:"red"}}>{usernameError}</div>
+
           <TextField  variant="outlined"  margin="normal"  required  fullWidth
             id="password"
             label="Şifrenizi girin."
@@ -69,6 +79,8 @@ export default function CenteredGrid() {
             value={password}
             onChange={(e) => setPasword(e.target.value)}
           />
+           <div style={{color:"red"}}>{passwordError}</div>
+
            <Button
             type="submit"
             fullWidth
