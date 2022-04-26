@@ -57,6 +57,8 @@ export default function CenteredGrid() {
             id="username"
             label="Kullanıcı Adınız"
             name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             autoFocus
           />
           <TextField  variant="outlined"  margin="normal"  required  fullWidth
@@ -64,6 +66,8 @@ export default function CenteredGrid() {
             label="Şifrenizi girin."
             name="password"
             type="password"
+            value={password}
+            onChange={(e) => setPasword(e.target.value)}
           />
            <Button
             type="submit"
