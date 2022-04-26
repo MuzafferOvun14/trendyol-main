@@ -8,6 +8,9 @@ import Divider from '@material-ui/core/Divider';
 import InboxIcon from '@material-ui/icons/Inbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import { useHistory } from 'react-router';
+import AddAlarmIcon from '@material-ui/icons/AddAlarm';
+import BathtubIcon from '@material-ui/icons/Bathtub';
+import BallotIcon from '@material-ui/icons/Ballot';
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -43,7 +46,25 @@ export default function CompanyMenu() {
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
+                        <BallotIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Ürünler" onClick={urunOpen} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
                         <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Ürünler" onClick={urunOpen} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <DraftsIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Ürünler" onClick={urunOpen} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <BathtubIcon />
                     </ListItemIcon>
                     <ListItemText primary="Ürünler" onClick={urunOpen} />
                 </ListItem>
